@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <!-- Cấu hình cơ bản cho trang web -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Giỏ hàng - Davis shop</title>
+    <!-- Import Bootstrap 5 CSS và Tailwind CSS để tạo giao diện responsive và đẹp mắt -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Sử dụng font Inter cho toàn bộ trang web */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Thêm background gradient nhẹ nhàng cho toàn bộ trang, đồng bộ với các trang khác */
+            background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+            background-attachment: fixed; /* Giữ background cố định khi cuộn */
+            min-height: 100vh;
+        }
+        .cart-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        /* Style cho nút xoá sản phẩm */
+        .remove-btn {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        .remove-btn:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-h-screen">
+    <div class="container py-5 flex-grow">
+        <h2 class="mb-4 text-center text-violet-700 font-bold">Giỏ hàng của bạn</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg rounded-xl transition-all duration-300 hover:shadow-2xl">
+                    <div class="card-body p-5">
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Sản phẩm</th>
+                                        <th scope="col">Tên</th>
+                                        <th scope="col">Giá</th>
+                                        <th scope="col">Số lượng</th>
+                                        <th scope="col">Tổng</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cartBody">
+                                    <!-- Sản phẩm mẫu -->
+                                    <tr data-price="40.00">
+                                        <td><img src="https://placehold.co/60x60/dee2e6/6c757d?text=Product1" class="cart-img" alt="Sản phẩm 1"></td>
+                                        <td>iPhone 15</td>
+                                        <td>25.000.000 VNĐ</td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm quantity-input rounded-full" value="1" min="1" style="width:80px;">
+                                        </td>
+                                        <td class="item-total">25.000.000 VNĐ</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-danger remove-btn rounded-full">Xóa</button>
+                                        </td>
+                                    </tr>
+                                    <!-- Sản phẩm mẫu 2 -->
+                                    <tr data-price="18.00">
+                                        <td><img src="https://placehold.co/60x60/dee2e6/6c757d?text=Product2" class="cart-img" alt="Sản phẩm 2"></td>
+                                        <td>Samsung Galaxy S24</td>
+                                        <td>18.990.000 VNĐ</td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm quantity-input rounded-full" value="2" min="1" style="width:80px;">
+                                        </td>
+                                        <td class="item-total">37.980.000 VNĐ</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-danger remove-btn rounded-full">Xóa</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="d-flex justify-content-end mt-3">
+                            <h5 class="font-bold">Tổng cộng: <span id="cartTotal" class="text-violet-700">62.980.000 VNĐ</span></h5>
+                        </div>
+                        <div class="d-grid gap-2 mt-4">
+                            <button class="btn btn-success rounded-full bg-violet-700 hover:bg-violet-800 transition-colors shadow-md" onclick="checkout()">Thanh toán</button>
+                            <button class="btn btn-outline-secondary rounded-full border-gray-400 text-gray-700 hover:bg-gray-200 transition-colors" onclick="continueShopping()">Tiếp tục mua sắm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer - Giữ nguyên theo yêu cầu -->
+    <footer class="py-5 bg-violet-950 rounded-t-xl mt-auto mx-4 mx-lg-5 shadow-lg">
+        <div class="container"><p class="m-0 text-center text-white">Bản quyền &copy; Davis shop 2023</p></div>
+    </footer>
+    
+    <!-- JavaScript để xử lý logic giỏ hàng -->
+    <script>
+        // Hàm cập nhật tổng tiền từng sản phẩm và tổng giỏ hàng
+        function updateTotals() {
+            let rows = document.querySelectorAll('#cartBody tr');
+            let total = 0;
+            rows.forEach(row => {
+                let priceText = row.querySelector('td:nth-child(3)').textContent.replace(' VNĐ', '').replace(/\./g, '');
+                let price = parseFloat(priceText);
+                let qty = parseInt(row.querySelector('.quantity-input').value);
+                let itemTotal = price * qty;
+                row.querySelector('.item-total').textContent = new Intl.NumberFormat('vi-VN').format(itemTotal) + ' VNĐ';
+                total += itemTotal;
+            });
+            document.getElementById('cartTotal').textContent = new Intl.NumberFormat('vi-VN').format(total) + ' VNĐ';
+        }
+
+        // Thêm event listener cho các input số lượng
+        document.querySelectorAll('.quantity-input').forEach(input => {
+            input.addEventListener('input', updateTotals);
+        });
+
+        // Thêm event listener cho các nút xóa sản phẩm
+        document.querySelectorAll('.remove-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.closest('tr').remove();
+                updateTotals();
+            
