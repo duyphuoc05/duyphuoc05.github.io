@@ -1,26 +1,23 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <!-- Cấu hình cơ bản cho trang web -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Liên hệ - Davis shop</title>
-    <!-- Import Bootstrap 5 CSS và Tailwind CSS để tạo giao diện responsive và đẹp mắt -->
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Sử dụng font Inter cho toàn bộ trang web */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            /* Thêm background gradient nhẹ nhàng cho toàn bộ trang, đồng bộ với các trang khác */
             background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
-            background-attachment: fixed; /* Giữ background cố định khi cuộn */
+            background-attachment: fixed;
             min-height: 100vh;
         }
-        /* Tùy chỉnh màu header và nút bấm để đồng bộ với chủ đề của Davis shop */
         .header-bg {
-            background-color: #5d3fd3; /* Màu tím đậm cho header */
+            background-color: #5d3fd3;
         }
         .btn-primary-custom {
             background-color: #5d3fd3;
@@ -32,8 +29,8 @@
         }
     </style>
 </head>
-<body class="d-flex flex-column min-h-screen">
-    <!-- Header đã được chỉnh sửa -->
+<body class="d-flex flex-column min-vh-100">
+    <!-- Header -->
     <header class="bg-violet-700 py-5 text-white">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center">
@@ -42,34 +39,34 @@
             </div>
         </div>
     </header>
-    <!-- Form liên hệ đã được chỉnh sửa -->
-    <section class="py-5 flex-grow">
+    <!-- Contact Form -->
+    <section class="py-5 flex-grow-1">
         <div class="container px-4 px-lg-5">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="card shadow-lg rounded-xl transition-all duration-300 hover:shadow-2xl">
                         <div class="card-body p-5">
-                            <form id="contactForm">
+                            <form id="contactForm" autocomplete="off">
                                 <div class="mb-3">
                                     <label for="name" class="form-label text-gray-700 font-medium">Họ và Tên</label>
-                                    <input type="text" class="form-control rounded-full focus:ring-violet-500 focus:border-violet-500 transition-all" id="name" placeholder="Nhập họ tên của bạn" required>
+                                    <input type="text" class="form-control rounded-pill focus:ring-violet-500 focus:border-violet-500 transition-all" id="name" name="name" placeholder="Nhập họ tên của bạn" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label text-gray-700 font-medium">Địa chỉ Email</label>
-                                    <input type="email" class="form-control rounded-full focus:ring-violet-500 focus:border-violet-500 transition-all" id="email" placeholder="Nhập email của bạn" required>
+                                    <input type="email" class="form-control rounded-pill focus:ring-violet-500 focus:border-violet-500 transition-all" id="email" name="email" placeholder="Nhập email của bạn" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="message" class="form-label text-gray-700 font-medium">Nội dung</label>
-                                    <textarea class="form-control rounded-lg focus:ring-violet-500 focus:border-violet-500 transition-all" id="message" rows="5" placeholder="Nhập tin nhắn của bạn" required></textarea>
+                                    <textarea class="form-control rounded-lg focus:ring-violet-500 focus:border-violet-500 transition-all" id="message" name="message" rows="5" placeholder="Nhập tin nhắn của bạn" required></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary w-100 rounded-full bg-violet-700 hover:bg-violet-800 focus:ring-violet-500 focus:ring-offset-2 transition-colors duration-200 shadow-md">Gửi tin nhắn</button>
+                                <button type="submit" class="btn btn-primary w-100 rounded-pill bg-violet-700 border-0 hover:bg-violet-800 focus:ring-violet-500 focus:ring-offset-2 transition-colors duration-200 shadow-md">Gửi tin nhắn</button>
                             </form>
                             <div class="mt-5 text-center text-gray-700">
-                                <p class="font-bold mb-1">Địa chỉ:</p>
+                                <p class="fw-bold mb-1">Địa chỉ:</p>
                                 <p>Số 123, đường ABC, quận XYZ, TP. Hồ Chí Minh</p>
-                                <p class="font-bold mb-1 mt-3">Điện thoại:</p>
+                                <p class="fw-bold mb-1 mt-3">Điện thoại:</p>
                                 <p>0123 456 789</p>
-                                <p class="font-bold mb-1 mt-3">Email:</p>
+                                <p class="fw-bold mb-1 mt-3">Email:</p>
                                 <p>contact@davis-shop.com</p>
                             </div>
                         </div>
@@ -78,29 +75,34 @@
             </div>
         </div>
     </section>
-    <!-- Footer đồng bộ với các trang khác -->
-    <footer class="py-5 bg-violet-950 rounded-t-xl mt-auto mx-4 mx-lg-5 shadow-lg">
-        <div class="container"><p class="m-0 text-center text-white">Bản quyền &copy; Davis shop 2023</p></div>
+    <!-- Footer -->
+    <footer class="py-5" style="background-color: #2e1065;">
+        <div class="container">
+            <p class="m-0 text-center text-white">Bản quyền &copy; Davis shop 2023</p>
+        </div>
     </footer>
-
-    <!-- JavaScript để xử lý logic gửi form (ví dụ) -->
+    <!-- JavaScript xử lý form -->
     <script>
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            // Đây là nơi bạn sẽ thêm logic gửi form thực tế, ví dụ sử dụng fetch API
-            // Hiện tại, chúng tôi sẽ hiển thị một thông báo thành công đơn giản.
+            // Xóa popup cũ nếu có
+            const oldBox = document.getElementById('contact-success-popup');
+            if (oldBox) oldBox.remove();
+            // Tạo popup mới
             const messageBox = document.createElement('div');
+            messageBox.id = 'contact-success-popup';
             messageBox.className = 'fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50';
             messageBox.innerHTML = `
                 <div class="bg-white p-6 rounded-xl shadow-xl max-w-sm w-full text-center">
-                    <p class="text-lg font-bold text-violet-700">Gửi thành công!</p>
+                    <p class="text-lg fw-bold text-violet-700">Gửi thành công!</p>
                     <p class="mt-2 text-gray-600">Cảm ơn bạn đã liên hệ. Chúng tôi sẽ phản hồi sớm nhất có thể.</p>
-                    <button onclick="this.closest('.fixed').remove()" class="mt-4 px-4 py-2 bg-violet-700 text-white rounded-full hover:bg-violet-800 transition-colors">Đóng</button>
+                    <button id="closePopupBtn" class="mt-4 px-4 py-2 bg-violet-700 text-white rounded-pill hover:bg-violet-800 transition-colors">Đóng</button>
                 </div>
             `;
             document.body.appendChild(messageBox);
-
-            // Xóa nội dung form sau khi gửi
+            document.getElementById('closePopupBtn').onclick = function() {
+                messageBox.remove();
+            };
             document.getElementById('contactForm').reset();
         });
     </script>
